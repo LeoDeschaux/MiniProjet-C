@@ -106,8 +106,16 @@ int main(int argc, const char** argv)
 		//AFFICHAGE
 
 		//SAUVEGARDER VERS FICHIER
-
-
+		FILE* fptr = fopen("ip.txt", "a");
+		if (fptr == NULL)
+		{
+			printf("Could not open file");
+			return 0;
+		}
+		fprintf(fptr, "%s\n", input);
+		
+		fclose(fptr);
+		
 		printf("-------------------------------------------\n");
 	}
 
@@ -221,7 +229,10 @@ int isAddressValid(char* input)
 	return isValid;
 }
 
-void constrIP(char adresse[], IPv4* ip) {
+void constrIP(char input[], IPv4* ip) {
+	char adresse[18] = "";
+	strncat(adresse, input);
+
 	char sep[] = "./";
 	char* p = strtok(adresse, sep);
 	ip->valeur1 = atoi(p);
@@ -264,3 +275,4 @@ bool isAddressPrivate(IPv4 ip) {
 
 	return a;
 }
+
