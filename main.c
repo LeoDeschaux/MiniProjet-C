@@ -31,6 +31,22 @@
 #define _CRT_SECURE_NO_WARNINGS
 #pragma warning(disable : 4996)
 
+//
+#define TAILLE_ADRESSE 18
+
+typedef struct IPv4 {
+	int valeur1;
+	int valeur2;
+	int valeur3;
+	int valeur4;
+	int masque;
+}IPv4;
+
+void constrIP(char adresse[], IPv4* ip);
+char trouverClasse(IPv4 ip);
+bool isAddressPrivate(IPv4 ip);
+
+
 char* getInput();
 void clearBuffer();
 
@@ -40,24 +56,57 @@ int main(int argc, const char** argv)
 {
 	while (true)
 	{
+		//GREET USER
+		printf("Veuillez enter une adress ip avec masque : ");
+
 		//READ INPUT, ex: "192.168.1.13/24"
-		char ip[50]; //= "192.168.1.9/24";
-		scanf("%s", ip);
-		printf("voici l'adresse : %s\n\n", ip);
+		char input[50]; //= "192.168.1.9/24";
+		scanf("%s", input);
+		printf("\n");
+		printf("L'adresse que vous venez de rentrer : %s\n", input);
 		
 		//CHECK IF INPUT IS VALID
-		if (isAddressValid(&ip))
-			printf("address is valid\n");
+		if (isAddressValid(&input))
+			printf("L'adress est valide\n");
 		else
-			printf("adress n'est pas valide..\n");
+		{
+			printf("L'adress n'est pas valide..\n");
+			printf("-------------------------------------------\n");
+			continue;
+		}
 
 		//CONVERT INPUT INTO IP STRUCT
+		IPv4 ip;
+		constrIP(input, &ip);
 
-		//FIND IP CLASS (A,B,C) & public/private
+		printf("\n");
+		printf("valeur1 = %d\n", ip.valeur1);
+		printf("valeur2 = %d\n", ip.valeur2);
+		printf("valeur3 = %d\n", ip.valeur3);
+		printf("valeur4 = %d\n", ip.valeur4);
+		printf("masque =  %d\n", ip.masque);
+
+		//FIND IP CLASS (A,B,C)
+		char classe = trouverClasse(ip);
+
+		printf("\n");
+		printf("Classe : %c\n", classe);
+
+		//FIND IP public/private
+		char type[10] = ""; 
+		if (isAddressPrivate(ip))
+			strncat(type, "private");
+		else
+			strncat(type, "public");
+
+		printf("Type : %s\n", type);
 
 		//FIND @network, @host
 
-		//PRINT IP & save in file 
+		//AFFICHAGE
+
+		//SAUVEGARDER VERS FICHIER
+
 
 		printf("-------------------------------------------\n");
 	}
@@ -157,31 +206,61 @@ int isAddressValid(char* input)
 	}
 
 	//DEBUG: PRINT @IP
-	printf("----------------------- \n");
-	printf("Resultats\n");
-	printf("VALEUR: %s\n", valeurs[0]);
-	printf("VALEUR: %s\n", valeurs[1]);
-	printf("VALEUR: %s\n", valeurs[2]);
-	printf("VALEUR: %s\n", valeurs[3]);
-	printf("MASK: %s\n",   mask);
-	printf("---------------- \n\n");
+	if (false)
+	{
+		printf("----------------------- \n");
+		printf("Resultats\n");
+		printf("VALEUR: %s\n", valeurs[0]);
+		printf("VALEUR: %s\n", valeurs[1]);
+		printf("VALEUR: %s\n", valeurs[2]);
+		printf("VALEUR: %s\n", valeurs[3]);
+		printf("MASK: %s\n", mask);
+		printf("---------------- \n\n");
+	}
 
 	return isValid;
 }
 
-char* getInput()
-{
-	char str[] = "123";
-	return *str;
+void constrIP(char adresse[], IPv4* ip) {
+	char sep[] = "./";
+	char* p = strtok(adresse, sep);
+	ip->valeur1 = atoi(p);
+	p = strtok(NULL, sep);
+	ip->valeur2 = atoi(p);
+	p = strtok(NULL, sep);
+	ip->valeur3 = atoi(p);
+	p = strtok(NULL, sep);
+	ip->valeur4 = atoi(p);
+	p = strtok(NULL, sep);
+	ip->masque = atoi(p);
 }
 
-void clearBuffer()
-{
-	char c;
-	c = getchar();
-	
-	while (c != '\n')
-	{
-		c = getchar();
-	}
+char trouverClasse(IPv4 ip) {
+	signed char classe;
+	if (ip.valeur1 >= 0 && ip.valeur1 < 127)
+		classe = 'A';
+	if (ip.valeur1 >= 128 && ip.valeur1 < 192)
+		classe = 'B';
+	if (ip.valeur1 >= 192 && ip.valeur1 < 224)
+		classe = 'C';
+	if (ip.valeur1 >= 224 && ip.valeur1 < 240)
+		classe = 'D';
+	if (ip.valeur1 >= 240 && ip.valeur1 < 256)
+		classe = 'E';
+	if (ip.valeur1 >= 127 && ip.valeur1 < 128)
+		classe = 'L';
+
+	return classe;
+}
+
+bool isAddressPrivate(IPv4 ip) {
+	bool a = false;
+	if (ip.valeur1 == 10)
+		a = true;
+	if (ip.valeur1 == 172 && ip.valeur2 >= 16 && ip.valeur2 < 32)
+		a = true;
+	if (ip.valeur1 == 192 && ip.valeur2 == 168)
+		a = true;
+
+	return a;
 }
