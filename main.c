@@ -47,18 +47,18 @@ bool isAddressPrivate(IPv4 ip);
 void sauvegarderVersFichier(char* input);
 
 void printIP(IPv4 ip);
-void trouverType();
+void trouverType(IPv4 ip);
 
 const char* octetDecimalEnOctetBinaire(int octetDecimal);
 int octetBinaireEnOctetDecimal(char* octetBinaire);
+
+IPv4 convertBinaryToIPv4(char binaryIP[]);
 
 int isAddressValid(char* input);
 
 int main(int argc, const char** argv)
 {
-	trouverType();
-
-	while (false)
+	while (true)
 	{
 		//GREET USER
 		printf("Veuillez entrer une adress ip avec masque : ");
@@ -288,12 +288,11 @@ void sauvegarderVersFichier(char* input)
 	fclose(fptr);
 }
 
-void trouverType()
+void trouverType(IPv4 ip)
 {
-	IPv4 ip;
-	constrIP("192.168.1.10/24", &ip);
+	//constrIP("192.168.1.10/24", &ip);
 
-	printf("IP : 192.168.1.10/24\n");
+	//printf("IP : 192.168.1.10/24\n");
 
 	//IPv4 = "192.168.1.10/24";
 	//binary= 1100 0000.1010 1000.0000 0001.0000 1010/24
@@ -361,62 +360,64 @@ void trouverType()
 	}
 
 	//Convert binary ip to IPv4
-	IPv4 newIp;
-
-	char valeur1[9] = "";
-	for (int i = 0; i < 8; i++)
-	{
-		char* c = binaryNetwork[i];
-		strncat(valeur1, &c);
-	}
-	newIp.valeur1 = octetBinaireEnOctetDecimal(&valeur1);
-
-	char valeur2[9] = "";
-	for (int i = 8; i < (8+8); i++)
-	{
-		char* c = binaryNetwork[i];
-		strncat(valeur2, &c);
-	}
-	newIp.valeur2 = octetBinaireEnOctetDecimal(&valeur2);
-
-	char valeur3[9] = "";
-	for (int i = 16; i < (16 + 8); i++)
-	{
-		char* c = binaryNetwork[i];
-		strncat(valeur3, &c);
-	}
-	newIp.valeur3 = octetBinaireEnOctetDecimal(&valeur3);
-
-	char valeur4[9] = "";
-	for (int i = 24; i < (24 + 8); i++)
-	{
-		char* c = binaryNetwork[i];
-		strncat(valeur4, &c);
-	}
-	newIp.valeur4 = octetBinaireEnOctetDecimal(&valeur4);
-
-	newIp.masque = ip.masque;
+	IPv4 networkIP;
+	networkIP = convertBinaryToIPv4(binaryNetwork);
 
 	printf("\n\n");
 	printf("ADRESSE RESEAU : \n");
-	printIP(newIp);
+	printIP(networkIP);
 
 	//BROADCAST
 	printf("\n");
 
+	printf("invert BrdCast : ");
+	char binaryReverseMask[32 + 1] = "";
+	//faire un inverse
+	for (int i = 0; i < 32; i++)
+	{
+		char cMask = binaryMask[i];
+
+		if (atoi(&cMask) == 0)
+		{
+			strncat(binaryReverseMask, "1", 1);
+			printf("1");
+		}
+		else
+		{
+			strncat(binaryReverseMask, "0", 1);
+			printf("0");
+		}
+	}
+
+	char binaryBroadcast[32 + 1] = "";
 	//faire un "ou logique"
+	printf("\n");
 	printf("Ou logique     : ");
 	for (int i = 0; i < 32; i++)
 	{
 		char cIP = binaryIP[i];
-		char cMask = binaryMask[i];
+		char cMask = binaryReverseMask[i];
 
-		if(atoi(&cIP) == 0 && atoi(&cMask) == 0)
+		if (atoi(&cIP) == 0 && atoi(&cMask) == 0)
+		{
+			strncat(binaryBroadcast, "0", 1);
 			printf("0");
+		}
 		else
+		{
+			strncat(binaryBroadcast, "1", 1);
 			printf("1");
+		}
 	}
 
+	//Convert binary ip to IPv4
+	IPv4 broadcastIP;
+	broadcastIP = convertBinaryToIPv4(binaryBroadcast);
+
+	printf("\n\n");
+	printf("ADRESSE BROADCAST : \n");
+	printIP(broadcastIP);
+	
 	printf("\n");
 }
 
@@ -480,4 +481,47 @@ int octetBinaireEnOctetDecimal(char* octetBinaire)
 	}
 
 	return resultat;
+}
+
+IPv4 convertBinaryToIPv4(char binaryIP[])
+{
+	IPv4 newIp;
+	char ip[32 + 1] = "";
+	strncat(ip, binaryIP);
+
+	char valeur1[9] = "";
+	for (int i = 0; i < 8; i++)
+	{
+		char* c = ip[i];
+		strncat(valeur1, &c);
+	}
+	newIp.valeur1 = octetBinaireEnOctetDecimal(&valeur1);
+
+	char valeur2[9] = "";
+	for (int i = 8; i < (8 + 8); i++)
+	{
+		char* c = ip[i];
+		strncat(valeur2, &c);
+	}
+	newIp.valeur2 = octetBinaireEnOctetDecimal(&valeur2);
+
+	char valeur3[9] = "";
+	for (int i = 16; i < (16 + 8); i++)
+	{
+		char* c = ip[i];
+		strncat(valeur3, &c);
+	}
+	newIp.valeur3 = octetBinaireEnOctetDecimal(&valeur3);
+
+	char valeur4[9] = "";
+	for (int i = 24; i < (24 + 8); i++)
+	{
+		char* c = ip[i];
+		strncat(valeur4, &c);
+	}
+	newIp.valeur4 = octetBinaireEnOctetDecimal(&valeur4);
+
+	newIp.masque = 0;
+
+	return newIp;
 }
