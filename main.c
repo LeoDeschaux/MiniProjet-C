@@ -10,9 +10,9 @@
 *                                                                             *
 *******************************************************************************
 *                                                                             *
-*  Nom-prénom1 : Deschaux-Beaume-Léo                                          *
+*  Nom-prénom1 : Ruiz-Nathan                                                  *
 *                                                                             *
-*  Nom-prénom2 : Ruiz-Nathan                                                  *
+*  Nom-prénom2 : Deschaux-Beaume-Léo                                          *
 *                                                                             *
 *******************************************************************************
 *                                                                             *
@@ -21,12 +21,10 @@
 ******************************************************************************/
 
 #include <stdio.h>
+#include <stdbool.h>
+#include <math.h>
 //#include <stdlib.h>
 //#include <string.h>
-
-#include <stdbool.h>
-
-#define LG_MAX 15
 
 #define _CRT_SECURE_NO_WARNINGS
 #pragma warning(disable : 4996)
@@ -46,31 +44,37 @@ void constrIP(char adresse[], IPv4* ip);
 char trouverClasse(IPv4 ip);
 bool isAddressPrivate(IPv4 ip);
 
+void sauvegarderVersFichier(char* input);
 
-char* getInput();
-void clearBuffer();
+void printIP(IPv4 ip);
+void trouverType();
+
+const char* octetDecimalEnOctetBinaire(int octetDecimal);
+int octetBinaireEnOctetDecimal(char* octetBinaire);
 
 int isAddressValid(char* input);
 
 int main(int argc, const char** argv)
 {
-	while (true)
+	trouverType();
+
+	while (false)
 	{
 		//GREET USER
-		printf("Veuillez enter une adress ip avec masque : ");
+		printf("Veuillez entrer une adress ip avec masque : ");
 
 		//READ INPUT, ex: "192.168.1.13/24"
-		char input[50]; //= "192.168.1.9/24";
+		char input[50];
 		scanf("%s", input);
 		printf("\n");
 		printf("L'adresse que vous venez de rentrer : %s\n", input);
 		
 		//CHECK IF INPUT IS VALID
 		if (isAddressValid(&input))
-			printf("L'adress est valide\n");
+			printf("L'adresse est valide\n");
 		else
 		{
-			printf("L'adress n'est pas valide..\n");
+			printf("L'adresse n'est pas valide..\n");
 			printf("-------------------------------------------\n");
 			continue;
 		}
@@ -80,12 +84,13 @@ int main(int argc, const char** argv)
 		constrIP(input, &ip);
 
 		printf("\n");
-		printf("valeur1 = %d\n", ip.valeur1);
-		printf("valeur2 = %d\n", ip.valeur2);
-		printf("valeur3 = %d\n", ip.valeur3);
-		printf("valeur4 = %d\n", ip.valeur4);
-		printf("masque =  %d\n", ip.masque);
+		printIP(ip);
 
+		//FIND TYPE
+		printf("\n");
+		trouverType(ip);
+
+		/*
 		//FIND IP CLASS (A,B,C)
 		char classe = trouverClasse(ip);
 
@@ -102,19 +107,13 @@ int main(int argc, const char** argv)
 		printf("Type : %s\n", type);
 
 		//FIND @network, @host
+		*/
 
 		//AFFICHAGE
+		
 
 		//SAUVEGARDER VERS FICHIER
-		FILE* fptr = fopen("ip.txt", "a");
-		if (fptr == NULL)
-		{
-			printf("Could not open file");
-			return 0;
-		}
-		fprintf(fptr, "%s\n", input);
-		
-		fclose(fptr);
+		//sauvegarderVersFichier(input);
 		
 		printf("-------------------------------------------\n");
 	}
@@ -276,3 +275,209 @@ bool isAddressPrivate(IPv4 ip) {
 	return a;
 }
 
+void sauvegarderVersFichier(char* input)
+{
+	FILE* fptr = fopen("ip.txt", "a");
+	if (fptr == NULL)
+	{
+		printf("Could not open file");
+		return 0;
+	}
+	fprintf(fptr, "%s\n", input);
+
+	fclose(fptr);
+}
+
+void trouverType()
+{
+	IPv4 ip;
+	constrIP("192.168.1.10/24", &ip);
+
+	printf("IP : 192.168.1.10/24\n");
+
+	//IPv4 = "192.168.1.10/24";
+	//binary= 1100 0000.1010 1000.0000 0001.0000 1010/24
+	//convert ip to binary
+	char binaryIP[32 + 1] = "";
+	strncat(binaryIP, octetDecimalEnOctetBinaire(ip.valeur1));
+	strncat(binaryIP, octetDecimalEnOctetBinaire(ip.valeur2));
+	strncat(binaryIP, octetDecimalEnOctetBinaire(ip.valeur3));
+	strncat(binaryIP, octetDecimalEnOctetBinaire(ip.valeur4));
+
+	printf("IP Binaire     : %s\n", binaryIP);
+
+	//mask = 255.255.255.0
+	//binary = 1111 1111.1111 1111.1111 1111.0000 0000
+	//convert mask to binary
+	char binaryMask[32 + 1] = "";
+
+	int i;
+	for (i = 0; i < ip.masque; i++)
+	{
+		strncat(binaryMask, "1", 1);
+	}
+	for (int j = i; j < 32; j++)
+	{
+		strncat(binaryMask, "0", 1);
+	}
+
+	printf("Masque Binaire : %s\n", binaryMask);
+
+	//##########################################################################
+
+	//printf("Type : ");
+
+	if (ip.valeur1 == 127 && ip.masque == 8 && ip.valeur4 != 0)
+	{
+		//LOCALHOST
+		// 127.255.255.255 c'est local host ???
+
+		printf("LOCALHOST\n");
+	}
+
+	//MULTICAST
+	//de 224.0.0.0 à 239.255.255.255 (adresses de classe D)
+
+	//NETWORK
+	//et logique ip + mask, exemple "127.15.0.15" + "255.255.255.0" = "127.15.1.0"
+	char binaryNetwork[32 + 1] = "";
+
+	printf("et logique     : ");
+	for (int i = 0; i < 32; i++)
+	{
+		char cIP = binaryIP[i];
+		char cMask = binaryMask[i];
+
+		if (atoi(&cIP) == 0 || atoi(&cMask) == 0)
+		{
+			strncat(binaryNetwork, "0", 1);
+			printf("0");
+		}
+		else
+		{
+			strncat(binaryNetwork, "1", 1);
+			printf("1");
+		}
+	}
+
+	//Convert binary ip to IPv4
+	IPv4 newIp;
+
+	char valeur1[9] = "";
+	for (int i = 0; i < 8; i++)
+	{
+		char* c = binaryNetwork[i];
+		strncat(valeur1, &c);
+	}
+	newIp.valeur1 = octetBinaireEnOctetDecimal(&valeur1);
+
+	char valeur2[9] = "";
+	for (int i = 8; i < (8+8); i++)
+	{
+		char* c = binaryNetwork[i];
+		strncat(valeur2, &c);
+	}
+	newIp.valeur2 = octetBinaireEnOctetDecimal(&valeur2);
+
+	char valeur3[9] = "";
+	for (int i = 16; i < (16 + 8); i++)
+	{
+		char* c = binaryNetwork[i];
+		strncat(valeur3, &c);
+	}
+	newIp.valeur3 = octetBinaireEnOctetDecimal(&valeur3);
+
+	char valeur4[9] = "";
+	for (int i = 24; i < (24 + 8); i++)
+	{
+		char* c = binaryNetwork[i];
+		strncat(valeur4, &c);
+	}
+	newIp.valeur4 = octetBinaireEnOctetDecimal(&valeur4);
+
+	newIp.masque = ip.masque;
+
+	printf("\n\n");
+	printf("ADRESSE RESEAU : \n");
+	printIP(newIp);
+
+	//BROADCAST
+	printf("\n");
+
+	//faire un "ou logique"
+	printf("Ou logique     : ");
+	for (int i = 0; i < 32; i++)
+	{
+		char cIP = binaryIP[i];
+		char cMask = binaryMask[i];
+
+		if(atoi(&cIP) == 0 && atoi(&cMask) == 0)
+			printf("0");
+		else
+			printf("1");
+	}
+
+	printf("\n");
+}
+
+char* trouverReseau(IPv4 ip);
+char* trouverHost(IPv4 ip);
+
+void printIP(IPv4 ip)
+{
+	printf("valeur1 = %d\n", ip.valeur1);
+	printf("valeur2 = %d\n", ip.valeur2);
+	printf("valeur3 = %d\n", ip.valeur3);
+	printf("valeur4 = %d\n", ip.valeur4);
+	printf("masque =  %d\n", ip.masque);
+}
+
+const char* octetDecimalEnOctetBinaire(int octetDecimal)
+{
+	static char motBinaire[8 + 1] = "";
+	memset(motBinaire, 0, sizeof(motBinaire));
+
+	int n = octetDecimal;
+
+	int a[10];
+
+	int i;
+	for (i = 0;n > 0;i++)
+	{
+		a[i] = n % 2;
+		n = n / 2;
+	}
+	int j;
+	for (j = 0; j < 8 - i; j++)
+	{
+		char c = '0';
+		strncat(motBinaire, &c, 1);
+	}
+	for (i = i - 1;i >= 0;i--)
+	{
+		char c = a[i] + '0';
+		strncat(motBinaire, &c, 1);
+	}
+
+	return motBinaire;
+
+	//strncat(outputTab, motBinaire, 8);
+}
+
+int octetBinaireEnOctetDecimal(char* octetBinaire)
+{
+	int resultat = 0;
+	char mot[9] = "";
+
+	strncat(mot, octetBinaire);
+
+	for (int i = 0; i < 8; i++)
+	{
+		if (mot[i] == '1')
+		{
+			resultat += pow(2, ((8 - 1) - i));
+		}
+	}
+
+	return resultat;
+}
