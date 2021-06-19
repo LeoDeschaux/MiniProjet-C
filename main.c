@@ -23,7 +23,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <math.h>
-//#include <stdlib.h>
+#include <stdlib.h>
 //#include <string.h>
 
 #include "functions.h"
@@ -51,6 +51,10 @@ int main(int argc, const char** argv)
 		{
 			printf("L'adresse n'est pas valide..\n");
 			printf("-------------------------------------------\n");
+
+			//fflush(stdin);
+			fseek(stdin, 0, SEEK_END); // CLEAR INPUT BUFFER
+
 			continue;
 		}
 
@@ -85,23 +89,10 @@ int main(int argc, const char** argv)
 		strncat(caracteristique, trouverType(ip));
 
 		//AFFICHAGE
-		printf("\n");
-		printf("IP        : %s\n", convertIPv4ToString(ip));
-		printf("Masque    : %s\n", convertIPv4ToString(masque));
-		printf("Reseau    : %s\n", convertIPv4ToString(reseau));
-		printf("Broadcast : %s\n", convertIPv4ToString(broadcast));
+		affichage(ip, masque, reseau, broadcast, classe, type, caracteristique);
 
-		printf("\n");
-		printf("Classe : %c\n", classe);
-
-		printf("Type : %s\n", type);
-
-		printf("Caracteristique : %s\n", caracteristique);
-
-		//SAUVEGARDER VERS FICHIER
-		sauvegarderVersFichier(input);
-		
-		printf("-------------------------------------------\n");
+		//SAUVEGARDER VERS FICHIER "ip.txt"
+		sauvegarderVersFichier(ip, masque, reseau, broadcast, classe, type, caracteristique);
 	}
 
 	printf("\n");

@@ -243,17 +243,44 @@ bool isAddressPrivate(IPv4 ip) {
 	return a;
 }
 
-void sauvegarderVersFichier(char* input)
+void affichage(IPv4 ip, IPv4 masque, IPv4 reseau, IPv4 broadcast,
+	char classe, char* type, char* caracteristique)
 {
-	FILE* fptr = fopen("ip.txt", "a");
-	if (fptr == NULL)
+	printf("\n");
+	printf("IP        : %s\n", convertIPv4ToString(ip));
+	printf("Masque    : %s\n", convertIPv4ToString(masque));
+	printf("Reseau    : %s\n", convertIPv4ToString(reseau));
+	printf("Broadcast : %s\n", convertIPv4ToString(broadcast));
+
+	printf("\n");
+	printf("Classe : %c\n", classe);
+	printf("Type : %s\n", type);
+	printf("Caracteristique : %s\n", caracteristique);
+	printf("-------------------------------------------\n");
+}
+
+void sauvegarderVersFichier(IPv4 ip, IPv4 masque, IPv4 reseau, IPv4 broadcast,
+	char classe, char* type, char* caracteristique)
+{
+	FILE* file = fopen("ip.txt", "a");
+	if (file == NULL)
 	{
 		printf("Could not open file");
 		return 0;
 	}
-	fprintf(fptr, "%s\n", input);
 
-	fclose(fptr);
+	fprintf(file, "IP        : %s\n", convertIPv4ToString(ip));
+	fprintf(file, "Masque    : %s\n", convertIPv4ToString(masque));
+	fprintf(file, "Reseau    : %s\n", convertIPv4ToString(reseau));
+	fprintf(file, "Broadcast : %s\n", convertIPv4ToString(broadcast));
+
+	fprintf(file, "\n");
+	fprintf(file, "Classe : %c\n", classe);
+	fprintf(file, "Type : %s\n", type);
+	fprintf(file, "Caracteristique : %s\n", caracteristique);
+	fprintf(file, "-------------------------------------------\n");
+
+	fclose(file);
 }
 
 const char* trouverType(IPv4 ip)

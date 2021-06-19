@@ -28,7 +28,11 @@ void findAdresseBroadcast(IPv4 ip, IPv4* broadcast);
 char trouverClasse(IPv4 ip);
 bool isAddressPrivate(IPv4 ip);
 
-void sauvegarderVersFichier(char* input);
+void affichage(IPv4 ip, IPv4 masque, IPv4 reseau, IPv4 broadcast,
+	char classe, char* type, char* caracteristique);
+
+void sauvegarderVersFichier(IPv4 ip, IPv4 masque, IPv4 reseau, IPv4 broadcast,
+	char classe, char* type, char* caracteristique);
 
 const char* trouverType(IPv4 ip);
 
