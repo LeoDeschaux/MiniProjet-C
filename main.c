@@ -68,9 +68,9 @@ int main(int argc, const char** argv)
 		//SAVOIR SI L'IP EST public/private
 		char type[10] = "";
 		if (isAddressPrivate(ip))
-			strncat(type, "private");
+			strncat(type, "private", sizeof(type));
 		else
-			strncat(type, "public");
+			strncat(type, "public", sizeof(type));
 
 		//TROUVER LE MASQUE
 		IPv4 masque;
@@ -86,7 +86,7 @@ int main(int argc, const char** argv)
 
 		//VERIFIER SI IL S'AGIT D'UN TYPE D'ADRESSE PARTICULIER (localhost, multicast, etc)
 		char caracteristique[30] = "";
-		strncat(caracteristique, trouverType(ip));
+		strncat(caracteristique, trouverType(ip), sizeof(caracteristique));
 
 		//AFFICHAGE
 		affichage(ip, masque, reseau, broadcast, classe, type, caracteristique);
