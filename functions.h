@@ -2,6 +2,8 @@
 
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdlib.h>
+
 #include <math.h>
 
 #define _CRT_SECURE_NO_WARNINGS
@@ -34,15 +36,15 @@ void affichage(IPv4 ip, IPv4 masque, IPv4 reseau, IPv4 broadcast,
 void sauvegarderVersFichier(IPv4 ip, IPv4 masque, IPv4 reseau, IPv4 broadcast,
 	char classe, char* type, char* caracteristique);
 
-const char* trouverType(IPv4 ip);
+void trouverType(IPv4 ip, char* string);
 
 void printIP(IPv4 ip);
 
-const char* octetDecimalEnOctetBinaire(int octetDecimal);
+void octetDecimalEnOctetBinaire(int octetDecimal, char* string);
+
 int octetBinaireEnOctetDecimal(char* octetBinaire);
 
 IPv4 convertBinaryToIPv4(char binaryIP[]);
 
-const char* convertIPv4ToString(IPv4 ip);
-const char* convertIPv4ToBinary(IPv4 ip);
-
+void convertIPv4ToString(IPv4 ip, char* string);
+void convertIPv4ToBinary(IPv4 ip, char* string);

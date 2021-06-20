@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdlib.h>
+
 #include <math.h>
 
 #define _CRT_SECURE_NO_WARNINGS
@@ -99,6 +101,7 @@ int isAddressValid(char* input)
 	return isValid;
 }
 
+/*
 void construireIP(char input[], IPv4* ip) {
 	char adresse[18+1] = "";
 	strncat(adresse, input, sizeof(adresse));
@@ -114,6 +117,24 @@ void construireIP(char input[], IPv4* ip) {
 	ip->valeur4 = atoi(p);
 	p = strtok(NULL, sep);
 	ip->masque = atoi(p);
+}
+*/
+
+void construireIP(char input[], IPv4* ip) {
+	char adresse[18 + 1] = "";
+	strncat(adresse, input, sizeof(adresse));
+
+	char sep[] = "./";
+	//char* p = strtok(adresse, sep);
+	ip->valeur1 = strtok(adresse, sep);//atoi(p);
+	//p = strtok(NULL, sep);
+	ip->valeur2 = strtok(NULL, sep);
+	//p = strtok(NULL, sep);
+	ip->valeur3 = strtok(NULL, sep);
+	//p = strtok(NULL, sep);
+	ip->valeur4 = strtok(NULL, sep);
+	//p = strtok(NULL, sep);
+	ip->masque = strtok(NULL, sep);
 }
 
 void construireMasque(int masque, IPv4* ip)
@@ -141,14 +162,17 @@ void findAdresseReseau(IPv4 ip, IPv4* reseau)
 {
 	//convert ip to binary
 	char binaryIP[32 + 1] = "";
-	strncat(binaryIP, convertIPv4ToBinary(ip), sizeof(convertIPv4ToBinary(ip)));
+	convertIPv4ToBinary(ip, binaryIP);
+
+	//strncat(binaryIP, convertIPv4ToBinary(ip), sizeof(binaryIP));
 
 	//convert mask to binary
 	IPv4 masque;
 	construireMasque(ip.masque, &masque);
 
 	char binaryMask[32 + 1] = "";
-	strncat(binaryMask, convertIPv4ToBinary(masque), sizeof(convertIPv4ToBinary(masque)));
+	convertIPv4ToBinary(masque, binaryMask);
+	//strncat(binaryMask, convertIPv4ToBinary(masque), sizeof(binaryMask));
 
 	//ET logique (ip ET masque)
 	char binaryNetwork[32 + 1] = "";
@@ -174,14 +198,14 @@ void findAdresseBroadcast(IPv4 ip, IPv4* broadcast)
 {
 	//convert ip to binary
 	char binaryIP[32 + 1] = "";
-	strncat(binaryIP, convertIPv4ToBinary(ip), sizeof(convertIPv4ToBinary(ip)));
+	convertIPv4ToBinary(ip, &binaryIP);
 
 	//convert mask to binary
 	IPv4 masque;
 	construireMasque(ip.masque, &masque);
 
 	char binaryMask[32 + 1] = "";
-	strncat(binaryMask, convertIPv4ToBinary(masque), sizeof(convertIPv4ToBinary(masque)));
+	convertIPv4ToBinary(masque, &binaryMask);
 
 	//inverser le masque
 	char binaryReverseMask[32 + 1] = "";
@@ -246,11 +270,26 @@ bool isAddressPrivate(IPv4 ip) {
 void affichage(IPv4 ip, IPv4 masque, IPv4 reseau, IPv4 broadcast,
 	char classe, char* type, char* caracteristique)
 {
+	/*
+	char binaryIP[32 + 1] = "";
+	convertIPv4ToBinary(ip, binaryIP);
+	*/
+
+	char s_ip[32 + 1] = "";
+	char s_masque[32 + 1] = "";
+	char s_reseau[32 + 1] = "";
+	char s_broadcast[32 + 1] = "";
+
+	convertIPv4ToString(ip, s_ip);
+	convertIPv4ToString(masque, s_masque);
+	convertIPv4ToString(reseau, s_reseau);
+	convertIPv4ToString(broadcast, s_broadcast);
+
 	printf("\n");
-	printf("IP        : %s\n", convertIPv4ToString(ip));
-	printf("Masque    : %s\n", convertIPv4ToString(masque));
-	printf("Reseau    : %s\n", convertIPv4ToString(reseau));
-	printf("Broadcast : %s\n", convertIPv4ToString(broadcast));
+	printf("IP        : %s\n", s_ip);
+	printf("Masque    : %s\n", s_masque);
+	printf("Reseau    : %s\n", s_reseau);
+	printf("Broadcast : %s\n", s_broadcast);
 
 	printf("\n");
 	printf("Classe : %c\n", classe);
@@ -269,10 +308,12 @@ void sauvegarderVersFichier(IPv4 ip, IPv4 masque, IPv4 reseau, IPv4 broadcast,
 		return 0;
 	}
 
+	/*
 	fprintf(file, "IP        : %s\n", convertIPv4ToString(ip));
 	fprintf(file, "Masque    : %s\n", convertIPv4ToString(masque));
 	fprintf(file, "Reseau    : %s\n", convertIPv4ToString(reseau));
 	fprintf(file, "Broadcast : %s\n", convertIPv4ToString(broadcast));
+	*/
 
 	fprintf(file, "\n");
 	fprintf(file, "Classe : %c\n", classe);
@@ -283,10 +324,10 @@ void sauvegarderVersFichier(IPv4 ip, IPv4 masque, IPv4 reseau, IPv4 broadcast,
 	fclose(file);
 }
 
-const char* trouverType(IPv4 ip)
+void trouverType(IPv4 ip, char* string)
 {
-	static char string[50] = "";
-	memset(string, 0, sizeof(string));
+	char newString[50] = "";
+	//memset(string, 0, sizeof(string));
 
 	//FIND MASQUE
 	IPv4 masque;
@@ -308,8 +349,10 @@ const char* trouverType(IPv4 ip)
 	//CHECK LOCALHOST
 	if (ip.valeur1 == 127 && ip.masque == 8 && ip.valeur4 != 0)
 	{
-		strncat(string, "localhost ", sizeof("localhost "));
-		return string;
+		strncat(newString, "localhost ", sizeof("localhost "));
+		//*string = newString;
+		strncat(string, newString, sizeof(newString));
+		return;
 	}
 
 	//CHECK MULTICAST
@@ -320,7 +363,7 @@ const char* trouverType(IPv4 ip)
 	strncat(c4, "D", 1);
 
 	if (strcmp(c3, c4) == 0)
-		strncat(string, "multicast ", sizeof("multicast "));
+		strncat(newString, "multicast ", sizeof("multicast "));
 	
 	//CHECK RESEAU
 	char c1[30] = "";
@@ -328,33 +371,39 @@ const char* trouverType(IPv4 ip)
 	memset(c1, 0, sizeof(c1));
 	memset(c2, 0, sizeof(c2));
 
-	strncat(c1, convertIPv4ToString(ip), sizeof(convertIPv4ToString(ip)));
-	strncat(c2, convertIPv4ToString(reseau), sizeof(convertIPv4ToString(reseau)));
+	convertIPv4ToString(ip, c1);
+	convertIPv4ToString(reseau, c2);
 
 	if (strcmp(c1, c2) == 0)
 	{
-		strncat(string, "reseau ");
-		return string;
+		strncat(newString, "reseau ", sizeof("reseau "));
+		//*string = newString;
+		strncat(string, newString, sizeof(newString));
+		return;
 	}
 
 	//CHECK BROADCAST
 	memset(c1, 0, sizeof(c1));
 	memset(c2, 0, sizeof(c2));
 
-	strncat(c1, convertIPv4ToString(ip), sizeof(convertIPv4ToString(ip)));
-	strncat(c2, convertIPv4ToString(broadcast), sizeof(convertIPv4ToString(broadcast)));
+	convertIPv4ToString(ip, c1);
+	convertIPv4ToString(broadcast, c2);
 
 	if (strcmp(c1, c2) == 0)
 	{
 		strncat(string, "broadcast ", sizeof("broadcast "));
-		return string;
+		//*string = newString;
+		strncat(string, newString, sizeof(newString));
+		return;
 	}
 
 	//NONE
 	if (strcmp(string, "") == 0)
 		strncat(string, "-", 1);
 	
-	return string;
+	//*string = newString;
+	strncat(string, newString, sizeof(newString));
+	//return newString;
 }
 
 void printIP(IPv4 ip)
@@ -366,10 +415,10 @@ void printIP(IPv4 ip)
 	printf("masque  = %d\n", ip.masque);
 }
 
-const char* octetDecimalEnOctetBinaire(int octetDecimal)
+void octetDecimalEnOctetBinaire(int octetDecimal, char* string)
 {
-	static char motBinaire[8 + 1] = "";
-	memset(motBinaire, 0, sizeof(motBinaire));
+	char motBinaire[8 + 1] = "";
+	//memset(motBinaire, 0, sizeof(motBinaire));
 
 	int n = octetDecimal;
 
@@ -393,7 +442,10 @@ const char* octetDecimalEnOctetBinaire(int octetDecimal)
 		strncat(motBinaire, &c, 1);
 	}
 
-	return motBinaire;
+	//*string = motBinaire;
+	strncat(string, motBinaire, sizeof(motBinaire));
+
+	//return motBinaire;
 }
 
 int octetBinaireEnOctetDecimal(char* octetBinaire)
@@ -401,13 +453,13 @@ int octetBinaireEnOctetDecimal(char* octetBinaire)
 	int resultat = 0;
 	char mot[9] = "";
 
-	strncat(mot, octetBinaire, sizeof(octetBinaire));
+	strncat(mot, octetBinaire, sizeof(mot));
 
 	for (int i = 0; i < 8; i++)
 	{
 		if (mot[i] == '1')
 		{
-			resultat += pow(2, ((8 - 1) - i));
+			resultat +=  pow(2, ( (8 - 1) - i));
 		}
 	}
 
@@ -418,7 +470,7 @@ IPv4 convertBinaryToIPv4(char binaryIP[])
 {
 	IPv4 newIp;
 	char ip[32 + 1] = "";
-	strncat(ip, binaryIP, sizeof(binaryIP));
+	strncat(ip, binaryIP, sizeof(ip));
 
 	char valeur1[9] = "";
 	for (int i = 0; i < 8; i++)
@@ -457,43 +509,51 @@ IPv4 convertBinaryToIPv4(char binaryIP[])
 	return newIp;
 }
 
-const char* convertIPv4ToString(IPv4 ip)
+void convertIPv4ToString(IPv4 ip, char* string)
 {
-	static char string[20] = "";
+	char newString[20] = "";
 	memset(string, 0, sizeof(string));
 
 	char valeur[5] = "";
 	memset(valeur, 0, sizeof(valeur));
 	sprintf(valeur, "%d.", ip.valeur1);
-	strncat(string, valeur, sizeof(valeur));
+	strncat(newString, valeur, sizeof(newString));
 
 	memset(valeur, 0, sizeof(valeur));
 	sprintf(valeur, "%d.", ip.valeur2);
-	strncat(string, valeur, sizeof(valeur));
+	strncat(newString, valeur, sizeof(newString));
 
 	memset(valeur, 0, sizeof(valeur));
 	sprintf(valeur, "%d.", ip.valeur3);
-	strncat(string, valeur, sizeof(valeur));
+	strncat(newString, valeur, sizeof(newString));
 
 	memset(valeur, 0, sizeof(valeur));
 	sprintf(valeur, "%d", ip.valeur4);
-	strncat(string, valeur, sizeof(valeur));
+	strncat(newString, valeur, sizeof(newString));
 
-	return string;
+	strncat(string, newString, sizeof(newString));
+	//*string = newString;
 }
 
-const char* convertIPv4ToBinary(IPv4 ip)
+void convertIPv4ToBinary(IPv4 ip, char* string)
 {
-	static char binaryIP[32 + 1] = "";
-	memset(binaryIP, 0, sizeof(binaryIP));
-	strncat(binaryIP, octetDecimalEnOctetBinaire(ip.valeur1), 
-		sizeof(octetDecimalEnOctetBinaire(ip.valeur1)));
-	strncat(binaryIP, octetDecimalEnOctetBinaire(ip.valeur2),
-		sizeof(octetDecimalEnOctetBinaire(ip.valeur2)));
-	strncat(binaryIP, octetDecimalEnOctetBinaire(ip.valeur3),
-		sizeof(octetDecimalEnOctetBinaire(ip.valeur3)));
-	strncat(binaryIP, octetDecimalEnOctetBinaire(ip.valeur4),
-		sizeof(octetDecimalEnOctetBinaire(ip.valeur4)));
+	char binaryIP[32 + 1] = "";
+	//memset(binaryIP, 0, sizeof(binaryIP));
 
-	return binaryIP;
+	/*
+	strncat(binaryIP, octetDecimalEnOctetBinaire(ip.valeur1), sizeof(binaryIP));
+	strncat(binaryIP, octetDecimalEnOctetBinaire(ip.valeur2), sizeof(binaryIP));
+	strncat(binaryIP, octetDecimalEnOctetBinaire(ip.valeur3), sizeof(binaryIP));
+	strncat(binaryIP, octetDecimalEnOctetBinaire(ip.valeur4), sizeof(binaryIP));
+	*/
+
+	octetDecimalEnOctetBinaire(ip.valeur1, binaryIP);
+	octetDecimalEnOctetBinaire(ip.valeur2, binaryIP);
+	octetDecimalEnOctetBinaire(ip.valeur3, binaryIP);
+	octetDecimalEnOctetBinaire(ip.valeur4, binaryIP);
+
+	strncat(string, binaryIP, sizeof(binaryIP));
+	//*string = binaryIP;
+	//free(string);
+	//return binaryIP;
 }

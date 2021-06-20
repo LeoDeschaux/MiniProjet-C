@@ -22,16 +22,16 @@
 
 #include <stdio.h>
 #include <stdbool.h>
-#include <math.h>
 #include <stdlib.h>
-//#include <string.h>
+
+#include <math.h>
 
 #include "functions.h"
 
 #define _CRT_SECURE_NO_WARNINGS
 #pragma warning(disable : 4996)
 
-int main(int argc, const char** argv)
+int main(int argc, char* argv[])
 {
 	while (true)
 	{
@@ -39,7 +39,7 @@ int main(int argc, const char** argv)
 		printf("Veuillez entrer une adresse ip avec masque : ");
 
 		//LIRE INPUT, ex: "192.168.1.13/24"
-		char input[50];
+		char input[50] ;
 		scanf("%s", input);
 		printf("\n");
 		printf("L'adresse que vous venez de rentrer : %s\n", input);
@@ -86,13 +86,14 @@ int main(int argc, const char** argv)
 
 		//VERIFIER SI IL S'AGIT D'UN TYPE D'ADRESSE PARTICULIER (localhost, multicast, etc)
 		char caracteristique[30] = "";
-		strncat(caracteristique, trouverType(ip), sizeof(caracteristique));
+		trouverType(ip, caracteristique);
+		//strncat(caracteristique, trouverType(ip), sizeof(caracteristique));
 
 		//AFFICHAGE
 		affichage(ip, masque, reseau, broadcast, classe, type, caracteristique);
 
 		//SAUVEGARDER VERS FICHIER "ip.txt"
-		sauvegarderVersFichier(ip, masque, reseau, broadcast, classe, type, caracteristique);
+		//sauvegarderVersFichier(ip, masque, reseau, broadcast, classe, type, caracteristique);
 	}
 
 	printf("\n");
