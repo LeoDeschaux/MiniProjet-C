@@ -10,8 +10,8 @@
 ![Schema](https://cdn.discordapp.com/attachments/707298011939733594/856234623223070720/Capture.PNG)
 
 ## **Description des fonctions**
-### **Vérifier le format**
-#### **isAdressValid**
+
+### **isAdressValid**
 ```c 
 int isAdressValid(char* input);
 ```
@@ -38,11 +38,3 @@ renvoie un integer pouvant prendre la valeur 0 ou 1
     //FALSE
 ```
 
-### **Extraire les champs**
-### **Convertir en valeurs numériques**
-
-### **Décoder l'adresse IP**
-### **Calculer le masque, l'adresse reseau, l'adresse de broadcast**
-### **Vérifier s'il s'agit d'un type d'adresse particulier**
-### **Afficher le résultat dans la console**
-### **Enregistrer le résultat dans un fichier "ip.txt"** 
