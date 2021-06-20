@@ -30,6 +30,11 @@ Le programme dispose également d'une fonction enregistrement qui lui permet d'e
 Le fichier est présent dans le répertoire où se trouve le programme et se nomme "ip.txt".
 Seules les adresses validées par le programme se retrouvent enregistrées dans ce fichier.
 
+#
+
+Note : une version développée sur Windows est disponible sur ce lien 
+[Windows Version](https://github.com/LeoDeschaux/MiniProjet-C/tree/main)
+
 ## **Preview**
 
 ![Gif fonctionnement](https://media.giphy.com/media/sla2HnCJ75JhkqUW6Q/giphy.gif)
