@@ -4,9 +4,11 @@
 
 ## **Preview**
 
-![Alt Text](https://media.giphy.com/media/sla2HnCJ75JhkqUW6Q/giphy.gif)
+![Gif fonctionnement](https://media.giphy.com/media/sla2HnCJ75JhkqUW6Q/giphy.gif)
 
 ## **Schéma de fonctionnement du programme**
+![Schema](https://cdn.discordapp.com/attachments/707298011939733594/856234623223070720/Capture.PNG)
+
 ## **Description des fonctions**
 ### **Vérifier le format**
 #### **isAdressValid**
@@ -43,4 +45,4 @@ renvoie un integer pouvant prendre la valeur 0 ou 1
 ### **Calculer le masque, l'adresse reseau, l'adresse de broadcast**
 ### **Vérifier s'il s'agit d'un type d'adresse particulier**
 ### **Afficher le résultat dans la console**
-### **Enregistrer le résultat dans un fichier "ip.txt" 
+### **Enregistrer le résultat dans un fichier "ip.txt"** 
