@@ -117,32 +117,32 @@ typedef struct IPv4 {
 | -- | -- |
 | description| affichage permet d'afficher les informations dans console
 | paramètre | IPv4 ip, IPv4 masque, IPv4 reseau, IPv4 broadcast, char classe, char* type, char* caracteristique |
-| return | void
+| return | 
 
 ### **Sauvegarder vers fichier "ip.txt"** 
 | sauvegarderVersFichier |  |
 | -- | -- |
 | description| sauvegarderVersFichier permet de sauvegarder les informations dans un fichier nommé ip.txt à l'interieur du répertoire du programme
 | paramètre | IPv4 ip, IPv4 masque, IPv4 reseau, IPv4 broadcast, char classe, char* type, char* caracteristique |
-| return | void
+| return | 
 
 #
 
 # **Description de fonctions facultatives utilisées lors du développement**
 
 ### Afficher une Structure IPv4
-| printIP(ip) |  |
+| printIP |  |
 | -- | -- |
 | description| printIP permet d'afficher séparement dans la console les differentes valeurs d'une adresse IP
 | paramètre | IPv4 ip |
-| return | void
+| return | 
 
 ### Convertir un octet decimal en un octet binaire
 | octetDecimalEnOctetBinaire |  |
 | -- | -- |
 | description| octetDecimalEnOctetBinaire permet de convertir un octet decimal donné en entrée en un octet binaire sous la forme d'une chaine de caractères 
 | paramètre | int octetDecimal, char* string |
-| return | void
+| return | 
 
 ### Convertir un octet binaire en un octet decimal
 | octetBinaireEnOctetDecimal |  |
@@ -163,11 +163,11 @@ typedef struct IPv4 {
 | -- | -- |
 | description| convertIPv4ToString permet de convertir une adresse IP IPv4 en une chaine de caractères
 | paramètre | IPv4 ip, char* string |
-| return | void
+| return | 
 
 ### Convertir une adresse IP decimal en une adresse IP binaire
 | convertIPv4ToBinary |  |
 | -- | -- |
 | description| convertIPv4ToBinary permet de convertir une adresse IP de type IPv4 en une adresse IP au format binaire dans une chaine de caractères
 | paramètre | IPv4 ip, char* string |
-| return | void
+| return | 
