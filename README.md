@@ -20,7 +20,7 @@ A quelle classe appartient cette adresse ?
 L'adresse est elle priver ou bien publique ?
 L'adresse IP correspond-elle à un type d'adresse particulier ? (localhost, réseau, broadcast, multicast)
 
--
+
 
 Le programme dispose également d'une fonction enregistrement qui lui permet d'enregistrer les adresses IP ainsi que les informations les concernant, au seins d'un fichier .txt.
 
