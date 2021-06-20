@@ -11,16 +11,16 @@
 
 ### **Présentation du projet**
 
-L'objectif de ce programme est d'analyser un adresse IP entrée dans la console par l'utilisateur.
+L'objectif de ce programme est d'analyser une adresse IP entrée dans la console par l'utilisateur.
 
-Le programme est alors capable de données les informations suivantes : 
+Le programme est alors capable de donner les informations suivantes : 
 - L'adresse IP est-elle valide ? 
 - Quelle est la valeur du masque ?
 - A quelle adresse réseau appartient cette IP ?
 - Quelle est l'adresse de diffusion correspondant à ce réseau ?
 
 - A quelle classe appartient cette adresse ?
-- L'adresse est elle priver ou bien publique ?
+- L'adresse est elle privée ou bien publique ?
 - L'adresse IP correspond-elle à un type d'adresse particulier ? (localhost, réseau, broadcast, multicast)
 
 #
@@ -77,7 +77,7 @@ typedef struct IPv4 {
 | paramètre | IPv4 ip |
 | return | char, correspondant à la classe (A,B,C,D, E)
 
-### **Savoir si l'adresse est public ou private**
+### **Savoir si l'adresse est publique ou privée**
 | isAddressPrivate |  |
 | -- | -- |
 | description| isAddressPrivate permet de s'avoir si une adresse IPv4 est privée ou publique
