@@ -43,6 +43,42 @@ renvoie un integer pouvant prendre la valeur 0 ou 1
 ### **Vérifier le format**
 | isAdressValid |  |
 | -- | -- |
-| description| isAdressValid est une fonction permettant de savoir si une chaine de charactère est une adresse ip au format CDIR et si les valeurs de cette adresse sont correte.
+| description| isAdressValid permet de savoir si une chaine de caractère est une adresse ip au format CDIR et si les valeurs de cette adresse sont correte.
 | paramètre | char* input |
 | return | Elle renvoit un int, 0 si l'adresse est valide et 1 si elle ne l'est pas
+
+### **Extraire les champs et convertir en structure IPv4**
+| construireIP |  |
+| -- | -- |
+| description| construireIP permet d'extraire les differentes valeurs ainsi que le masque à l'interieur d'une chaine de caractère. Le format doit être en notation CIDR
+| paramètre | char* input, IPv4* ip | 
+| return | -
+
+### **Convertir en valeurs numériques**
+
+### **Décoder l'adresse IP**
+### **Calculer le masque, l'adresse reseau, l'adresse de broadcast**
+
+
+### **Vérifier s'il s'agit d'un type d'adresse particulier**
+| nomFonction |  |
+| -- | -- |
+| description| txt
+| paramètre | txt |
+| return | txt
+
+
+### **Afficher le résultat dans la console**
+| nomFonction |  |
+| -- | -- |
+| description| txt
+| paramètre | txt |
+| return | txt
+
+
+### **Enregistrer le résultat dans un fichier "ip.txt"** 
+| nomFonction |  |
+| -- | -- |
+| description| txt
+| paramètre | txt |
+| return | txt
