@@ -8,7 +8,24 @@
 
 ### **Présentation du projet**
 
-L'objectif de ce programme est d'analyser un adresse IP entrée par l'utilisateur dans la console.
+L'objectif de ce programme est d'analyser un adresse IP entrée dans la console par l'utilisateur.
+
+Le programme est alors capable de données les informations suivantes : 
+L'adresse IP est-elle valide ? 
+Quelle est la valeur du masque ?
+A quelle adresse réseau appartient cette IP ?
+Quelle est l'adresse de diffusion correspondant à ce réseau ?
+
+A quelle classe appartient cette adresse ?
+L'adresse est elle priver ou bien publique ?
+L'adresse IP correspond-elle à un type d'adresse particulier ? (localhost, réseau, broadcast, multicast)
+
+-
+
+Le programme dispose également d'une fonction enregistrement qui lui permet d'enregistrer les adresses IP ainsi que les informations les concernant, au seins d'un fichier .txt.
+
+Le fichier est présent dans le répertoire où se trouve le programme et se nomme "ip.txt".
+Seules les adresses validées par le programme se retrouvent enregistrées dans ce fichier.
 
 ## **Preview**
 
