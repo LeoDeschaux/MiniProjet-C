@@ -45,7 +45,7 @@ renvoie un integer pouvant prendre la valeur 0 ou 1
 | -- | -- |
 | description| isAdressValid permet de savoir si une chaine de caractère est une adresse ip au format CDIR et si les valeurs de cette adresse sont correte.
 | paramètre | char* input |
-| return | Elle renvoit un int, 0 si l'adresse est valide et 1 si elle ne l'est pas
+| return | Elle renvoit un int prenant la valeur 0 si l'adresse est valide et 1 si elle ne l'est pas
 
 ### **Extraire les champs et convertir en structure IPv4**
 | construireIP |  |
@@ -54,9 +54,77 @@ renvoie un integer pouvant prendre la valeur 0 ou 1
 | paramètre | char* input, IPv4* ip | 
 | return | -
 
-### **Convertir en valeurs numériques**
+### **Trouver la classe de l'adresse IP**
+| trouverClasse |  |
+| -- | -- |
+| description| trouverClasse permet d'obtenir la classe à laquelle appartient l'adresse IP
+| paramètre | IPv4 ip |
+| return | char //correspondant à la classe (A,B,C,D,E)
 
-### **Décoder l'adresse IP**
+### **Trouver la classe de l'adresse IP**
+| nomFonction |  |
+| -- | -- |
+| description| txt
+| paramètre | txt |
+| return | txt
+
+### **Savoir si l'adresse est public ou private**
+| nomFonction |  |
+| -- | -- |
+| description| txt
+| paramètre | txt |
+| return | txt
+
+### **Calculer le masque**
+| nomFonction |  |
+| -- | -- |
+| description| txt
+| paramètre | txt |
+| return | txt
+
+
+### **Trouver l'adresse reseau**
+| nomFonction |  |
+| -- | -- |
+| description| txt
+| paramètre | txt |
+| return | txt
+
+### **Trouver l'adresse de broadcast**
+| nomFonction |  |
+| -- | -- |
+| description| txt
+| paramètre | txt |
+| return | txt
+
+### **Vérifier si il s'agit d'un type d'adresse particulier**
+| nomFonction |  |
+| -- | -- |
+| description| txt
+| paramètre | txt |
+| return | txt
+
+
+### **Affichager dans la console**
+| nomFonction |  |
+| -- | -- |
+| description| txt
+| paramètre | txt |
+| return | txt
+
+### **Sauvegarder vers un fichie "ip.txt"**
+| nomFonction |  |
+| -- | -- |
+| description| txt
+| paramètre | txt |
+| return | txt
+
+
+#
+#
+#
+
+
 ### **Calculer le masque, l'adresse reseau, l'adresse de broadcast**
 
 
