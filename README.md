@@ -1,8 +1,8 @@
 # **MiniProjet C - RUIZ Nathan & DESCHAUX-BEAUME Léo**
 
-#### **Projet M2201**
+## **Projet M2201**
 
-#### **sujet-2 - Analyse adresse IP**
+### **Sujet 2 - Analyse adresse IP**
 
 **Etudiants :** **RUIZ Nathan** et **DESCHAUX-BEAUME Léo**
 
