@@ -41,7 +41,7 @@ typedef struct IPv4 {
 ### **Extraire les champs et convertir en structure IPv4**
 | construireIP |  |
 | -- | -- |
-| description| construireIP permet d'extraire les differentes valeurs ainsi que le masque à l'interieur d'une chaine de caractère. Le format doit être en notation CIDR
+| description| construireIP permet d'extraire les differentes valeurs présentes à l'interieur d'une chaine de caractère, de convertir les valeurs en int, puis de les stocker dans une structure IPv4. Le format doit être en notation CIDR
 | paramètre | char* input, IPv4* ip | 
 | return | 
 
@@ -101,53 +101,48 @@ typedef struct IPv4 {
 | paramètre | IPv4 ip, IPv4 masque, IPv4 reseau, IPv4 broadcast, char classe, char* type, char* caracteristique |
 | return | void
 
+#
+
 ## **Description de fonctions facultatives utilisée lors du développement**
 
 ### Afficher une Structure IPv4
 | printIP(ip) |  |
 | -- | -- |
-| description| La fonction printIP sert à afficher séparement sur la console les differentes valeurs d'une adresse IP
+| description| printIP permet d'afficher séparement dans la console les differentes valeurs d'une adresse IP
 | paramètre | IPv4 ip |
 | return | void
 
 ### Convertir un octet decimal en un octet binaire
-| octetDecimalEnOctetBinaire(octetDecimal, string) |  |
+| octetDecimalEnOctetBinaire |  |
 | -- | -- |
-| description| La fonction octetDecimalEnOctetBinaire sert à convertir un octet decimal donné en entrée en un octet binaire sous la forme d'une chaine de caractères donnée en entrée 
+| description| octetDecimalEnOctetBinaire permet de convertir un octet decimal donné en entrée en un octet binaire sous la forme d'une chaine de caractères 
 | paramètre | int octetDecimal, char* string |
 | return | void
 
 ### Convertir un octet binaire en un octet decimal
-| octetBinaireEnOctetDecimal(octetBinaire) |  |
+| octetBinaireEnOctetDecimal |  |
 | -- | -- |
-| description| La fonction octetBinaireEnOctetDecimal sert à convertir l'octet en binaire donné en entré en une valeur décimale
+| description| octetBinaireEnOctetDecimal permet de convertir un octet binaire donné en entrée en une valeur décimale
 | paramètre | char* octetBinaire |
 | return | int
 
-### Convertir une adresse IP binaire en adresse IP en Decimal
-| convertBinaryToIPv4(binaryIP[]) |  |
+### Convertir une adresse IP binaire en adresse IP Decimal
+| convertBinaryToIPv4 |  |
 | -- | -- |
-| description| La fonction convertBinaryToIPv4 sert à convertir une adresse IP sous forme binaire en un Type IPv4
+| description| convertBinaryToIPv4 permet de convertir une adresse IP sous forme binaire en une structure de données IPv4
 | paramètre | char binaryIP[] |
 | return | IPv4
 
 ### Convertir une adresse IP en une chaine de caractères
-| convertIPv4ToString(ip, string) |  |
+| convertIPv4ToString |  |
 | -- | -- |
-| description| La fonction convertIPv4ToString sert à convertir une adresse IP en type IPv4 en une chaine de caractères
+| description| convertIPv4ToString permet de convertir une adresse IP IPv4 en une chaine de caractères
 | paramètre | IPv4 ip, char* string |
 | return | void
 
-### Convertir une adresse IP en decimal en une adresse IP en binaire
-| convertIPv4ToBinary(ip, string) |  |
+### Convertir une adresse IP decimal en une adresse IP binaire
+| convertIPv4ToBinary |  |
 | -- | -- |
-| description| La fontion convertIPv4ToBinary sert à passer une adresse IP de type IPv4 en une adresse IP sous forme binaire dans une chaine de caractères
+| description| convertIPv4ToBinary permet de convertir une adresse IP de type IPv4 en une adresse IP au format binaire dans une chaine de caractères
 | paramètre | IPv4 ip, char* string |
-| return | void
-
-### Construire une structure IPv4
-| construireIP(input[],  ip) |  |
-| -- | -- |
-| description| La fonction construireIP sert à construire la structure IPv4 en y entrant les valeurs entrées par l'utilisateurs, elle separe les valeurs et les converti en int
-| paramètre | char input[], IPv4* ip |
 | return | void
