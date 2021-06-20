@@ -92,14 +92,14 @@ renvoie un integer pouvant prendre la valeur 0 ou 1
 ### **Vérifier s'il s'agit d'un type d'adresse particulier**
 | trouverType |  |
 | -- | -- |
-| description| La fonction trouverType sert à obtenir si possible le type d'une adresse IP (Localhost / Multicast / Reseau / Broadcast)
+| description| trouverType permet de savoir si l'adresse IP correspond à un type d'adresse particulier (Localhost / MultiCast / Reseau / Broadcast)
 | paramètre | IPv4 ip  |
 | return | const char*
 
 ### **Affichager dans la console**
 | affichage|  |
 | -- | -- |
-| description| La fonction affichage sert à afficher les informations sur la console
+| description| affichage permet d'afficher les informations dans console
 | paramètre | IPv4 ip, IPv4 masque, IPv4 reseau, IPv4 broadcast, char classe, char* type, char* caracteristique |
 | return | void
 
