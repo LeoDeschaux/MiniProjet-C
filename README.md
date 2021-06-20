@@ -39,18 +39,6 @@ renvoie un integer pouvant prendre la valeur 0 ou 1
 ```
 
 #
-#
-
-
-| Fonction | Description | Paramètre | Return |
-| -- | -- | -- | -- |
-| a | b | c | d
-
-
-| Fonction | Description | Paramètre | Return |
-| -- | -- | -- | -- |
-| a | b | c | d
-
 
 | Fonction | Description | Paramètre | Return | 
 | -- | -- | -- | -- |
