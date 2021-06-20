@@ -6,13 +6,13 @@
 
 ![Alt Text](https://media.giphy.com/media/sla2HnCJ75JhkqUW6Q/giphy.gif)
 
- ## **Vérifier le format**
- ### **isAdressValid**
+## **Vérifier le format**
+### **isAdressValid**
 ```c 
 int isAdressValid(char* input);
 ```
 
-**`isAdressValid`** est une fonction permettant de savoir si une chaine de charactère est une adresse ip au format CDIR et si les valeurs de cette ip sont correte.
+**`isAdressValid`** est une fonction permettant de savoir si une chaine de charactère est une adresse ip au format CDIR et si les valeurs de cette adresse sont correte.
 
 Elle renvoit **0** si l'adresse est valide et **1** si elle ne l'est pas
 
@@ -30,4 +30,12 @@ char* input //correspond à la chaine de charactère à analyser
    if (isAdresseValid("192.168.1.999/24")
     //FALSE
 ```
-#
+
+## **Extraire les champs**
+## **Convertir en valeurs numériques**
+
+## **Décoder l'adresse IP**
+## **Calculer le masque, l'adresse reseau, l'adresse de broadcast**
+## **Vérifier s'il s'agit d'un type d'adresse particulier**
+## **Afficher le résultat dans la console**
+## **Enregistrer le résultat dans un fichier "ip.txt" 
