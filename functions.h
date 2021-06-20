@@ -2,9 +2,10 @@
 
 #include <stdio.h>
 #include <stdbool.h>
-#include <stdlib.h>
 
 #include <math.h>
+#include <string.h>
+#include "functions.h"
 
 #define _CRT_SECURE_NO_WARNINGS
 #pragma warning(disable : 4996)

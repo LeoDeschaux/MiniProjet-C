@@ -22,10 +22,9 @@
 
 #include <stdio.h>
 #include <stdbool.h>
-#include <stdlib.h>
 
 #include <math.h>
-
+#include <string.h>
 #include "functions.h"
 
 #define _CRT_SECURE_NO_WARNINGS
@@ -52,8 +51,8 @@ int main(int argc, char* argv[])
 			printf("L'adresse n'est pas valide..\n");
 			printf("-------------------------------------------\n");
 
-			//fflush(stdin);
-			fseek(stdin, 0, SEEK_END); // CLEAR INPUT BUFFER
+			// CLEAR INPUT BUFFER
+			fseek(stdin, 0, SEEK_END);
 
 			continue;
 		}
@@ -87,13 +86,12 @@ int main(int argc, char* argv[])
 		//VERIFIER SI IL S'AGIT D'UN TYPE D'ADRESSE PARTICULIER (localhost, multicast, etc)
 		char caracteristique[30] = "";
 		trouverType(ip, caracteristique);
-		//strncat(caracteristique, trouverType(ip), sizeof(caracteristique));
 
 		//AFFICHAGE
 		affichage(ip, masque, reseau, broadcast, classe, type, caracteristique);
 
 		//SAUVEGARDER VERS FICHIER "ip.txt"
-		//sauvegarderVersFichier(ip, masque, reseau, broadcast, classe, type, caracteristique);
+		sauvegarderVersFichier(ip, masque, reseau, broadcast, classe, type, caracteristique);
 	}
 
 	printf("\n");
