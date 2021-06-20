@@ -2,9 +2,9 @@
  Projet M2201 
  sujet-2 - Analyse adresse IP
 
- Etudiants : RUIZ Nathan et DESCHAUX-BEAUME Léo
- Groupe : E1
- 1ère année, semestre 2 
+Etudiants : RUIZ Nathan et DESCHAUX-BEAUME Léo
+Groupe : E1
+
 
 ### **Présentation du projet**
 
