@@ -10,7 +10,7 @@
 
 L'objectif de ce programme est d'analyser un adresse IP entrée dans la console par l'utilisateur.
 
-- Le programme est alors capable de données les informations suivantes : 
+Le programme est alors capable de données les informations suivantes : 
 - L'adresse IP est-elle valide ? 
 - Quelle est la valeur du masque ?
 - A quelle adresse réseau appartient cette IP ?
