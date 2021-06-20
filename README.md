@@ -55,3 +55,4 @@ renvoie un integer pouvant prendre la valeur 0 ou 1
 | Fonction | Description | Paramètre | Return | 
 | -- | -- | -- | -- |
 | int isAdressValid(char* input); | isAdressValid est une fonction permettant de savoir si une chaine de charactère est une adresse ip au format CDIR et si les valeurs de cette adresse sont correte. | char* input | Elle envoit 0 si l'adresse est valide et 1 si elle ne l'est pas
+| osef | osef | osef | osef
