@@ -53,7 +53,7 @@ typedef struct IPv4 {
 }IPv4;
 ```
 
-## **Description des fonctions**
+# **Description des fonctions**
 
 
 ### **Vérifier le format**
@@ -128,7 +128,7 @@ typedef struct IPv4 {
 
 #
 
-## **Description de fonctions facultatives utilisée lors du développement**
+# **Description de fonctions facultatives utilisée lors du développement**
 
 ### Afficher une Structure IPv4
 | printIP(ip) |  |
