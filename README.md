@@ -9,8 +9,18 @@
 ## **Schéma de fonctionnement du programme**
 ![Schema](https://cdn.discordapp.com/attachments/707298011939733594/856234623223070720/Capture.PNG)
 
-## **Description des fonctions**
+## **Structure de données IPv4**
+```c
+typedef struct IPv4 {
+   int valeur1;
+   int valeur2;
+   int valeur3;
+   int valeur4;
+   int masque;
+}IPv4;
+```
 
+## **Description des fonctions**
 
 
 ### **Vérifier le format**
@@ -77,39 +87,7 @@
 | return | void
 
 ### **Sauvegarder vers un fichier "ip.txt"**
-| nomFonction |  |
-| -- | -- |
-| description| txt
-| paramètre | txt |
-| return | txt
-
-
-#
-#
-#
-
-
-### **Calculer le masque, l'adresse reseau, l'adresse de broadcast**
-
-
-### **Vérifier s'il s'agit d'un type d'adresse particulier**
-| nomFonction |  |
-| -- | -- |
-| description| txt
-| paramètre | txt |
-| return | txt
-
-
-### **Afficher le résultat dans la console**
-| nomFonction |  |
-| -- | -- |
-| description| txt
-| paramètre | txt |
-| return | txt
-
-
-### **Enregistrer le résultat dans un fichier "ip.txt"** 
-| nomFonction |  |
+| sauvegarderVersFichier |  |
 | -- | -- |
 | description| txt
 | paramètre | txt |
