@@ -46,7 +46,7 @@ renvoie un integer pouvant prendre la valeur 0 ou 1
 | osef | osef | osef | osef
 
 
-### **isAdressValid ***
+### **isAdressValid**
 | isAdressValid | |
 | -- | -- |
 | description| isAdressValid est une fonction permettant de savoir si une chaine de charactère est une adresse ip au format CDIR et si les valeurs de cette adresse sont correte.
