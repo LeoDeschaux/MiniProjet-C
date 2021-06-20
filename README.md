@@ -59,7 +59,7 @@ renvoie un integer pouvant prendre la valeur 0 ou 1
 | -- | -- |
 | description| trouverClasse permet d'obtenir la classe à laquelle appartient l'adresse IP
 | paramètre | IPv4 ip |
-| return | char //correspondant à la classe (A,B,C,D,E)
+| return | char, correspondant à la classe (A,B,C,D,E)
 
 ### **Trouver la classe de l'adresse IP**
 | nomFonction |  |
@@ -82,7 +82,6 @@ renvoie un integer pouvant prendre la valeur 0 ou 1
 | paramètre | txt |
 | return | txt
 
-
 ### **Trouver l'adresse reseau**
 | nomFonction |  |
 | -- | -- |
@@ -97,22 +96,21 @@ renvoie un integer pouvant prendre la valeur 0 ou 1
 | paramètre | txt |
 | return | txt
 
-### **Vérifier si il s'agit d'un type d'adresse particulier**
-| nomFonction |  |
+### **Vérifier s'il s'agit d'un type d'adresse particulier**
+| trouverType(ip, caracteristique) |  |
 | -- | -- |
-| description| txt
-| paramètre | txt |
-| return | txt
-
+| description| La fonction trouverType sert à obtenir si possible le type d'une adresse IP (Localhost / Multicast / Reseau / Broadcast)
+| paramètre | IPv4 ip  |
+| return | const char*
 
 ### **Affichager dans la console**
-| nomFonction |  |
+| affichage(ip, masque, reseau, broadcast, classe, type, caracteristique)|  |
 | -- | -- |
-| description| txt
-| paramètre | txt |
-| return | txt
+| description| La fonction affichage sert à afficher les informations sur la console
+| paramètre | IPv4 ip, IPv4 masque, IPv4 reseau, IPv4 broadcast, char classe, char* type, char* caracteristique |
+| return | void
 
-### **Sauvegarder vers un fichie "ip.txt"**
+### **Sauvegarder vers un fichier "ip.txt"**
 | nomFonction |  |
 | -- | -- |
 | description| txt
