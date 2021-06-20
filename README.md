@@ -44,3 +44,11 @@ renvoie un integer pouvant prendre la valeur 0 ou 1
 | -- | -- | -- | -- |
 |isAdressValid | isAdressValid est une fonction permettant de savoir si une chaine de charactère est une adresse ip au format CDIR et si les valeurs de cette adresse sont correte. | char* input | Elle renvoit un int, 0 si l'adresse est valide et 1 si elle ne l'est pas
 | osef | osef | osef | osef
+
+
+### **isAdressValid ***
+| isAdressValid | |
+| -- | -- |
+| description| isAdressValid est une fonction permettant de savoir si une chaine de charactère est une adresse ip au format CDIR et si les valeurs de cette adresse sont correte.
+| paramètre | char* input |
+| return | Elle renvoit un int, 0 si l'adresse est valide et 1 si elle ne l'est pas
