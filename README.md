@@ -52,7 +52,7 @@ renvoie un integer pouvant prendre la valeur 0 ou 1
 | -- | -- |
 | description| construireIP permet d'extraire les differentes valeurs ainsi que le masque à l'interieur d'une chaine de caractère. Le format doit être en notation CIDR
 | paramètre | char* input, IPv4* ip | 
-| return | -
+| return | 
 
 ### **Trouver la classe de l'adresse IP**
 | trouverClasse |  |
@@ -73,31 +73,31 @@ renvoie un integer pouvant prendre la valeur 0 ou 1
 | -- | -- |
 | description| construireMasque permet d'obtenir un masque au format pointé à partir d'une IP au format CIDR
 | paramètre | IPv4 ip, IPv4* masque |
-| return | -
+| return | 
 
 ### **Trouver l'adresse reseau**
 | findAdresseReseau |  |
 | -- | -- |
 | description| findAdresseReseau permet d'obtenir l'adresse du reseau à laquelle appartient une adresse IP à partir de cette dîte adresse IP
 | paramètre | IPv4 ip, IPv4* reseau |
-| return | -
+| return | 
 
 ### **Trouver l'adresse de broadcast**
 | findAdresseBroadcast |  |
 | -- | -- |
 | description| findAdresseReseau permet d'obtenir l'adresse de broadcast à laquelle appartient une adresse IP à partir de cette dîte adresse IP
 | paramètre | IPv4 ip, IPv4* broadcast |
-| return | -
+| return | 
 
 ### **Vérifier s'il s'agit d'un type d'adresse particulier**
-| trouverType(ip, caracteristique) |  |
+| trouverType |  |
 | -- | -- |
 | description| La fonction trouverType sert à obtenir si possible le type d'une adresse IP (Localhost / Multicast / Reseau / Broadcast)
 | paramètre | IPv4 ip  |
 | return | const char*
 
 ### **Affichager dans la console**
-| affichage(ip, masque, reseau, broadcast, classe, type, caracteristique)|  |
+| affichage|  |
 | -- | -- |
 | description| La fonction affichage sert à afficher les informations sur la console
 | paramètre | IPv4 ip, IPv4 masque, IPv4 reseau, IPv4 broadcast, char classe, char* type, char* caracteristique |
