@@ -46,8 +46,8 @@ renvoie un integer pouvant prendre la valeur 0 ou 1
 | osef | osef | osef | osef
 
 
-### **isAdressValid**
-| isAdressValid | |
+### **Vérifier le format**
+| isAdressValid | int isAdressValid(char* input); |
 | -- | -- |
 | description| isAdressValid est une fonction permettant de savoir si une chaine de charactère est une adresse ip au format CDIR et si les valeurs de cette adresse sont correte.
 | paramètre | char* input |
