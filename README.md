@@ -59,42 +59,35 @@ renvoie un integer pouvant prendre la valeur 0 ou 1
 | -- | -- |
 | description| trouverClasse permet d'obtenir la classe à laquelle appartient l'adresse IP
 | paramètre | IPv4 ip |
-| return | char, correspondant à la classe (A,B,C,D,E)
-
-### **Trouver la classe de l'adresse IP**
-| nomFonction |  |
-| -- | -- |
-| description| txt
-| paramètre | txt |
-| return | txt
+| return | char, correspondant à la classe (A,B,C,D, E)
 
 ### **Savoir si l'adresse est public ou private**
-| nomFonction |  |
+| isAddressPrivate |  |
 | -- | -- |
-| description| txt
-| paramètre | txt |
-| return | txt
+| description| isAddressPrivate permet de s'avoir si une adresse IPv4 est privée ou publique
+| paramètre | IPv4 ip |
+| return | bool, renvoi TRUE si l'adresse est privé, sinon FALSE
 
 ### **Calculer le masque**
-| nomFonction |  |
+| construireMasque |  |
 | -- | -- |
-| description| txt
-| paramètre | txt |
-| return | txt
+| description| construireMasque permet d'obtenir un masque au format pointé à partir d'une IP au format CIDR
+| paramètre | IPv4 ip, IPv4* masque |
+| return | -
 
 ### **Trouver l'adresse reseau**
-| nomFonction |  |
+| findAdresseReseau |  |
 | -- | -- |
-| description| txt
-| paramètre | txt |
-| return | txt
+| description| findAdresseReseau permet d'obtenir l'adresse du reseau à laquelle appartient une adresse IP à partir de cette dîte adresse IP
+| paramètre | IPv4 ip, IPv4* reseau |
+| return | -
 
 ### **Trouver l'adresse de broadcast**
-| nomFonction |  |
+| findAdresseBroadcast |  |
 | -- | -- |
-| description| txt
-| paramètre | txt |
-| return | txt
+| description| findAdresseReseau permet d'obtenir l'adresse de broadcast à laquelle appartient une adresse IP à partir de cette dîte adresse IP
+| paramètre | IPv4 ip, IPv4* broadcast |
+| return | -
 
 ### **Vérifier s'il s'agit d'un type d'adresse particulier**
 | trouverType(ip, caracteristique) |  |
