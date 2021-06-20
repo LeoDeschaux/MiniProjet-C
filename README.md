@@ -95,9 +95,9 @@ typedef struct IPv4 {
 | return | void
 
 ### **Sauvegarder vers fichier "ip.txt"** 
-| sauvegarderVersFichier(ip, masque, reseau, broadcast, classe, type, caracteristique) |  |
+| sauvegarderVersFichier |  |
 | -- | -- |
-| description| La fonction sauvegarderVersFichier sert à sauvegarder les informations dans un fichier nommé ip.txt dans le dossier du programme
+| description| sauvegarderVersFichier permet de sauvegarder les informations dans un fichier nommé ip.txt à l'interieur du répertoire du programme
 | paramètre | IPv4 ip, IPv4 masque, IPv4 reseau, IPv4 broadcast, char classe, char* type, char* caracteristique |
 | return | void
 
